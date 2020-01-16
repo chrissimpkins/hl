@@ -10,6 +10,8 @@ fn main() {
     const COPYRIGHT: &str = "Copyright 2019 Christopher Simpkins";
     const LICENSE: &str = "Apache License, v2.0";
     const SOURCE_REPOSITORY: &str = "https://github.com/chrissimpkins/hl";
+    const HELP: &str = r#"Pipe the standard output stream from an executable to the hl executable and use options to define the piped source format and syntax highlighting color scheme.
+    "#;
 
     let args: Vec<String> = std::env::args().collect();
 
@@ -39,6 +41,9 @@ fn main() {
         println!();
         let help_brief = format!("Usage: {} [options]", EXECUTABLE);
         print!("{}", opts.usage(&help_brief));
+        println!();
+        println!("{}", HELP);
+
         exit(0);
     }
 
