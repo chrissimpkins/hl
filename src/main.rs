@@ -12,24 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//use getopts::Options;
 use std::io;
 use std::io::prelude::*;
 use std::process::exit;
 
+use hl::highlighters::{get_theme, highlight_line};
 use hl::parsers;
 use hl::strings;
 
+use getopts::Matches;
+
 use syntect::easy::HighlightLines;
-use syntect::highlighting::{Style, ThemeSet};
+use syntect::highlighting::ThemeSet;
 use syntect::parsing::SyntaxSet;
-use syntect::util::as_24_bit_terminal_escaped;
 
 fn main() {
+    const SYNTAX_DEFAULT: &str = "txt";
+
     let args: Vec<String> = std::env::args().collect();
 
     let opts = parsers::parse_options();
-    let matches = parsers::parse_matches(&args, opts);
+    let matches: Matches;
+    match parsers::parse_matches(&args, opts) {
+        Ok(m) => matches = m,
+        Err(e) => {
+            println!("Error: {}", e);
+            exit(1);
+        }
+    };
 
     // ==================
     //
@@ -58,43 +68,36 @@ fn main() {
     //  execution
     //
     // ====================
-    let ps = SyntaxSet::load_defaults_newlines();
+    let ss = SyntaxSet::load_defaults_newlines();
     let ts = ThemeSet::load_defaults();
 
     let user_syntax: String;
     match matches.opt_str("syntax") {
         Some(n) => user_syntax = n,
-        None => user_syntax = "txt".to_string(),
+        None => user_syntax = SYNTAX_DEFAULT.to_string(), // use SYNTAX_DEFAULT when not specified
     };
 
-    let syntax = ps
-        .find_syntax_by_token(&user_syntax)
-        .unwrap_or_else(|| ps.find_syntax_by_token("txt").unwrap());
-
-    // InspiredGitHub
-    // Solarized (dark)
-    // Solarized (light)
-    // base16-eighties.dark
-    // base16-mocha.dark
-    // base16-ocean.dark
-    // base16-ocean.light
-    let mut user_theme = "base16-eighties.dark"; // default theme
+    let mut user_theme = "default"; // default theme
     if matches.opt_present("light") {
-        user_theme = "Solarized (light)";
+        user_theme = "light";
     } else if matches.opt_present("dark") {
-        user_theme = "base16-ocean.dark";
+        user_theme = "dark";
     }
 
-    let mut h = HighlightLines::new(syntax, &ts.themes[user_theme]);
+    let syntax = ss
+        .find_syntax_by_token(&user_syntax)
+        .unwrap_or_else(|| ss.find_syntax_by_token(&SYNTAX_DEFAULT).unwrap()); // use SYNTAX_DEFAULT if request not found
+    let mut hl = HighlightLines::new(syntax, &ts.themes[&get_theme(user_theme)]);
 
     for line in io::stdin().lock().lines() {
         match line {
             Ok(n) => {
-                let ranges: Vec<(Style, &str)> = h.highlight(&n, &ps);
-                let escaped = as_24_bit_terminal_escaped(&ranges[..], true);
-                println!("{}", escaped);
+                println!("{}", highlight_line(&n, &mut hl, &ss));
             }
-            Err(error) => println!("Error: {}", error),
+            Err(error) => {
+                println!("Error: {}", error);
+                exit(1);
+            }
         }
     }
 }
