@@ -1,2 +1,2 @@
 # hl
-A pipeline syntax highlighter built with Rust
+A pipeline syntax highlighting tool built with Rust
