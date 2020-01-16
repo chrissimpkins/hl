@@ -1,8 +1,3 @@
-
-
-
-
-
 // ==================
 //
 //  Parsers Module
@@ -28,9 +23,7 @@ pub mod parsers {
 
         return matches;
     }
-
 } // END parsers module
-
 
 // ==================
 //
