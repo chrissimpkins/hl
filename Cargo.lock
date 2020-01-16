@@ -217,7 +217,7 @@ dependencies = [
 
 [[package]]
 name = "hl"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "getopts 0.2.21 (registry+https://github.com/rust-lang/crates.io-index)",
  "syntect 3.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
