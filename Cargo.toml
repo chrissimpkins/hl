@@ -1,0 +1,16 @@
+[package]
+name = "hl"
+description = "A pipeline syntax highlighting tool"
+version = "0.0.1"
+authors = ["Chris Simpkins <chris@sourcefoundry.org>"]
+edition = "2018"
+homepage = "https://github.com/chrissimpkins/hl"
+documentation = "https://github.com/chrissimpkins/hl"
+repository = "https://github.com/chrissimpkins/hl"
+readme = "README.md"
+license = "Apache-2.0"
+keywords = ["cli", "commandline", "application", "highlight", "syntax", "sourcecode"]
+
+[dependencies]
+syntect = "3.2"
+getopts = "0.2"
