@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use getopts::Options;
+//use getopts::Options;
 use std::io;
 use std::io::prelude::*;
 use std::process::exit;
 
-use hl::parsers::parse_options;
-use hl::settings::{COPYRIGHT, DESCRIPTION, EXECUTABLE, HELP, LICENSE, SOURCE_REPOSITORY, VERSION};
+use hl::parsers;
+use hl::strings;
 
 use syntect::easy::HighlightLines;
 use syntect::highlighting::{Style, ThemeSet};
@@ -28,9 +28,8 @@ use syntect::util::as_24_bit_terminal_escaped;
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let mut opts = Options::new();
-
-    let matches = parse_options(&args);
+    let opts = parsers::parse_options();
+    let matches = parsers::parse_matches(&args, opts);
 
     // ==================
     //
@@ -38,18 +37,7 @@ fn main() {
     //
     // ==================
     if matches.opt_present("help") {
-        println!("===================================");
-        println!("{} v{}", EXECUTABLE, VERSION);
-        println!("{}", DESCRIPTION);
-        println!("{}", COPYRIGHT);
-        println!("{}", LICENSE);
-        println!("{}", SOURCE_REPOSITORY);
-        println!("===================================");
-        println!();
-        let help_brief = format!("Usage: {} [options]", EXECUTABLE);
-        print!("{}", opts.usage(&help_brief));
-        println!();
-        println!("{}", HELP);
+        print!("{}", strings::get_help());
 
         exit(0);
     }
@@ -60,7 +48,7 @@ fn main() {
     //
     // ==================
     if matches.opt_present("version") {
-        println!("{} v{}", EXECUTABLE, VERSION);
+        println!("{}", strings::get_version());
         exit(0);
     }
 
