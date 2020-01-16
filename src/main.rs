@@ -3,9 +3,9 @@ use std::io;
 use std::io::prelude::*;
 use std::process::exit;
 
+use hl::parsers::parse_options;
 use hl::settings::{COPYRIGHT, DESCRIPTION, EXECUTABLE, HELP, LICENSE, SOURCE_REPOSITORY, VERSION};
 
-use hl::parse_options;
 use syntect::easy::HighlightLines;
 use syntect::highlighting::{Style, ThemeSet};
 use syntect::parsing::SyntaxSet;
