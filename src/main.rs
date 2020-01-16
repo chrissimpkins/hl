@@ -3,35 +3,20 @@ use std::io;
 use std::io::prelude::*;
 use std::process::exit;
 
+use hl::settings::{COPYRIGHT, DESCRIPTION, EXECUTABLE, HELP, LICENSE, SOURCE_REPOSITORY, VERSION};
+
+use hl::parse_options;
 use syntect::easy::HighlightLines;
+use syntect::highlighting::{Style, ThemeSet};
 use syntect::parsing::SyntaxSet;
-use syntect::highlighting::{ThemeSet, Style};
 use syntect::util::as_24_bit_terminal_escaped;
 
 fn main() {
-    const EXECUTABLE: &str = env!("CARGO_PKG_NAME");
-    const VERSION: &str = env!("CARGO_PKG_VERSION");
-    const DESCRIPTION: &str = env!("CARGO_PKG_DESCRIPTION");
-    const COPYRIGHT: &str = "Copyright 2019 Christopher Simpkins";
-    const LICENSE: &str = "Apache License, v2.0";
-    const SOURCE_REPOSITORY: &str = "https://github.com/chrissimpkins/hl";
-    const HELP: &str = r#"Pipe the standard output stream from an executable to the hl executable and use options to define the piped source format and syntax highlighting color scheme.
-    "#;
-
     let args: Vec<String> = std::env::args().collect();
 
     let mut opts = Options::new();
-    opts.optflag("l", "light", "Light mode");
-    opts.optflag("d", "dark", "Dark mode");
-    opts.optopt("s", "syntax", "Source syntax format", "SYNTAX");
-    opts.optflag("h", "help", "Print this help menu");
-    opts.optflag("v", "version", "Print version number");
 
-    // parse command line arguments
-    let matches = match opts.parse(&args[1..]) {
-        Ok(m) => m,
-        Err(f) => panic!(f.to_string()),
-    };
+    let matches = parse_options(&args);
 
     // ==================
     //
@@ -80,7 +65,8 @@ fn main() {
         None => user_syntax = "txt".to_string(),
     };
 
-    let syntax = ps.find_syntax_by_token(&user_syntax)
+    let syntax = ps
+        .find_syntax_by_token(&user_syntax)
         .unwrap_or_else(|| ps.find_syntax_by_token("txt").unwrap());
 
     // InspiredGitHub
@@ -108,6 +94,5 @@ fn main() {
             }
             Err(error) => println!("Error: {}", error),
         }
-
     }
 }
