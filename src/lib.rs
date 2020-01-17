@@ -31,3 +31,26 @@ pub mod settings {
     pub const HELP: &str = r#"Pipe the standard output stream from an executable to the hl executable. Use options to define the piped source format and modify the default syntax highlighting color scheme.
     "#;
 } // END settings module
+
+
+#[cfg(test)]
+mod tests {
+    use regex::Regex;
+    use crate::settings::{EXECUTABLE, LICENSE, VERSION};
+
+    #[test]
+    fn test_executable_name() {
+        assert_eq!(EXECUTABLE, "hl");
+    }
+
+    #[test]
+    fn test_executable_version() {
+        let re = Regex::new(r"^\d{1,3}\.\d{1,3}\.\d{1,3}$").unwrap();
+        assert!(re.is_match(VERSION));
+    }
+
+    #[test]
+    fn test_license() {
+        assert_eq!(LICENSE, "Apache License, v2.0");
+    }
+}
