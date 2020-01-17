@@ -14,3 +14,6 @@ keywords = ["cli", "commandline", "application", "highlight", "syntax", "sourcec
 [dependencies]
 syntect = "3.2"
 getopts = "0.2"
+
+[dev-dependencies]
+regex = "1"
