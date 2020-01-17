@@ -36,7 +36,7 @@ fn main() {
     match parsers::parse_matches(&args, opts) {
         Ok(m) => matches = m,
         Err(e) => {
-            println!("Error: {}", e);
+            eprintln!("Error: {}", e);
             exit(1);
         }
     };
@@ -65,7 +65,6 @@ fn main() {
     // ====================
     //
     //  Syntax highlighting
-    //  execution
     //
     // ====================
     let ss = SyntaxSet::load_defaults_newlines();
@@ -95,7 +94,7 @@ fn main() {
                 println!("{}", highlight_line(&n, &mut hl, &ss));
             }
             Err(error) => {
-                println!("Error: {}", error);
+                eprintln!("Error: {}", error);
                 exit(1);
             }
         }
