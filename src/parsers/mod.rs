@@ -39,3 +39,49 @@ pub fn parse_matches(args: &[String], opts: Options) -> Result<Matches, io::Erro
         Err(f) => Err(io::Error::new(io::ErrorKind::Other, f.to_string())),
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn test_parse_matches_valid_empty() {
+        let opts = crate::parsers::parse_options();
+        let argv = ["hl".to_string()];
+        let matches = crate::parsers::parse_matches(&argv, opts);
+        assert!(matches.is_ok());
+    }
+
+    #[test]
+    fn test_parse_matches_valid_one_valid_option() {
+        let opts = crate::parsers::parse_options();
+        let argv = ["hl".to_string(),"-l".to_string()];
+        let matches = crate::parsers::parse_matches(&argv, opts);
+        assert!(matches.is_ok());
+    }
+
+    #[test]
+    fn test_parse_matches_valid_two_valid_options() {
+        let opts = crate::parsers::parse_options();
+        let argv = ["hl".to_string(), "-l".to_string(), "-s".to_string(), "txt".to_string()];
+        let matches = crate::parsers::parse_matches(&argv, opts);
+        assert!(matches.is_ok());
+    }
+
+    #[test]
+    fn test_parse_matches_invalid_unsupported_option() {
+        let opts = crate::parsers::parse_options();
+        let argv = ["hl".to_string(), "--bogus".to_string()];
+        let matches = crate::parsers::parse_matches(&argv, opts);
+        assert!(matches.is_err());
+    }
+
+    #[test]
+    fn test_parse_matches_invalid_missing_argument() {
+        let opts = crate::parsers::parse_options();
+        let argv = ["hl".to_string(), "--syntax".to_string()];
+        let matches = crate::parsers::parse_matches(&argv, opts);
+        assert!(matches.is_err());
+    }
+
+}
