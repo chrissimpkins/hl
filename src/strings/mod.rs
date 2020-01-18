@@ -56,3 +56,16 @@ pub fn get_help() -> String {
 pub fn get_version() -> String {
     format!("{} v{}", settings::EXECUTABLE, settings::VERSION)
 }
+
+
+#[cfg(test)]
+mod tests {
+    use regex::Regex;
+
+    #[test]
+    fn test_version_string() {
+        let re = Regex::new(r"^hl\sv\d{1,3}\.\d{1,3}\.\d{1,3}$").unwrap();
+        assert!(re.is_match(&crate::strings::get_version()))
+    }
+
+}
