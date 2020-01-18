@@ -10,6 +10,10 @@ repository = "https://github.com/chrissimpkins/hl"
 readme = "README.md"
 license = "Apache-2.0"
 keywords = ["cli", "commandline", "application", "highlight", "syntax", "sourcecode"]
+exclude = [
+    "/appveyor.yml",
+    "/.travis.yml"
+]
 
 [dependencies]
 syntect = "3.2"
