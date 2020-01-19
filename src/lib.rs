@@ -15,6 +15,8 @@
 pub mod highlighters;
 pub mod parsers;
 pub mod strings;
+pub mod syntaxes;
+pub mod themes;
 
 // ==================
 //
@@ -32,11 +34,10 @@ pub mod settings {
     "#;
 } // END settings module
 
-
 #[cfg(test)]
 mod tests {
-    use regex::Regex;
     use crate::settings::{EXECUTABLE, LICENSE, VERSION};
+    use regex::Regex;
 
     #[test]
     fn test_executable_name() {
