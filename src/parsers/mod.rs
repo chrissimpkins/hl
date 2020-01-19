@@ -26,6 +26,8 @@ pub fn parse_options() -> Options {
     opts.optflag("l", "light", "Light highlight mode");
     opts.optflag("d", "dark", "Dark highlight mode");
     opts.optopt("s", "syntax", "Source syntax format", "SYNTAX");
+    // todo: implement custom theme support
+//    opts.optopt("t", "theme", "Theme name", "THEME");
     opts.optflag("h", "help", "Print this help menu");
     opts.optflag("v", "version", "Print version number");
 
@@ -39,7 +41,6 @@ pub fn parse_matches(args: &[String], opts: Options) -> Result<Matches, io::Erro
         Err(f) => Err(io::Error::new(io::ErrorKind::Other, f.to_string())),
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -55,7 +56,7 @@ mod tests {
     #[test]
     fn test_parse_matches_valid_one_valid_option() {
         let opts = crate::parsers::parse_options();
-        let argv = ["hl".to_string(),"-l".to_string()];
+        let argv = ["hl".to_string(), "-l".to_string()];
         let matches = crate::parsers::parse_matches(&argv, opts);
         assert!(matches.is_ok());
     }
@@ -63,7 +64,12 @@ mod tests {
     #[test]
     fn test_parse_matches_valid_two_valid_options() {
         let opts = crate::parsers::parse_options();
-        let argv = ["hl".to_string(), "-l".to_string(), "-s".to_string(), "txt".to_string()];
+        let argv = [
+            "hl".to_string(),
+            "-l".to_string(),
+            "-s".to_string(),
+            "txt".to_string(),
+        ];
         let matches = crate::parsers::parse_matches(&argv, opts);
         assert!(matches.is_ok());
     }
@@ -83,5 +89,4 @@ mod tests {
         let matches = crate::parsers::parse_matches(&argv, opts);
         assert!(matches.is_err());
     }
-
 }
