@@ -19,16 +19,16 @@ use std::process::exit;
 use hl::highlighters::{get_theme, highlight_line};
 use hl::parsers;
 use hl::strings;
+use hl::syntaxes::{get_syntax_set_from_binary};
+use hl::themes::{get_theme_set_from_binary};
 
 use getopts::Matches;
 
 use syntect::easy::HighlightLines;
-use syntect::highlighting::ThemeSet;
-use syntect::parsing::SyntaxSet;
+
+const SYNTAX_DEFAULT: &str = "txt";
 
 fn main() {
-    const SYNTAX_DEFAULT: &str = "txt";
-
     let args: Vec<String> = std::env::args().collect();
 
     let opts = parsers::parse_options();
@@ -67,8 +67,20 @@ fn main() {
     //  Syntax highlighting
     //
     // ====================
-    let ss = SyntaxSet::load_defaults_newlines();
-    let ts = ThemeSet::load_defaults();
+    //    let ss = SyntaxSet::load_defaults_newlines();
+    //    let mut ssb = ss.into_builder();
+    //    ssb.add_plain_text_syntax();
+    //    ssb.add_from_folder("assets/syntaxes", true).unwrap();
+    //    let ss = ssb.build();
+    let ss = get_syntax_set_from_binary();
+
+    //    let ts = ThemeSet::load_defaults();
+    //    let ts = ThemeSet::load_from_folder("assets/themes").unwrap();
+    let ts = get_theme_set_from_binary();
+    //    for syntax in ss.syntaxes() {
+    //        println!("{}", syntax.name);
+    //    }
+    //    exit(0);
 
     let user_syntax: String;
     match matches.opt_str("syntax") {
