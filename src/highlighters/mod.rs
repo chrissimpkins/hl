@@ -36,12 +36,10 @@ const THEME_DEFAULT: &str = "Material";
 const THEME_LIGHT: &str = "Ayu-Light";
 
 pub fn get_theme(user_request: &str) -> String {
-    if user_request == "light" {
-        THEME_LIGHT.to_string()
-    } else if user_request == "dark" {
-        THEME_DARK.to_string()
-    } else {
-        THEME_DEFAULT.to_string()
+    match user_request {
+        "light" => THEME_LIGHT.to_string(),
+        "dark" => THEME_DARK.to_string(),
+        _ => THEME_DEFAULT.to_string(),
     }
 }
 
