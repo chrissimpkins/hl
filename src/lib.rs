@@ -27,7 +27,7 @@ pub mod settings {
     pub const EXECUTABLE: &str = env!("CARGO_PKG_NAME");
     pub const VERSION: &str = env!("CARGO_PKG_VERSION");
     pub const DESCRIPTION: &str = env!("CARGO_PKG_DESCRIPTION");
-    pub const COPYRIGHT: &str = "Copyright 2019 Christopher Simpkins";
+    pub const COPYRIGHT: &str = "Copyright 2020 Christopher Simpkins";
     pub const LICENSE: &str = "Apache License, v2.0";
     pub const SOURCE_REPOSITORY: &str = "https://github.com/chrissimpkins/hl";
     pub const HELP: &str = r#"Pipe the standard output stream from an executable to the hl executable. Use options to define the piped source format and modify the default syntax highlighting color scheme.
