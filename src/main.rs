@@ -1,4 +1,4 @@
-// Copyright 2019 Christopher Simpkins
+// Copyright 2020 Christopher Simpkins
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ use std::process::exit;
 use hl::highlighters::{get_theme, highlight_line};
 use hl::parsers;
 use hl::strings;
-use hl::syntaxes::{get_syntax_set_from_binary};
-use hl::themes::{get_theme_set_from_binary};
+use hl::syntaxes::get_syntax_set_from_binary;
+use hl::themes::get_theme_set_from_binary;
 
 use getopts::Matches;
 

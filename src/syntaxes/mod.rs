@@ -1,4 +1,4 @@
-// Copyright 2019 Christopher Simpkins
+// Copyright 2020 Christopher Simpkins
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 //
 // ====================
 
-use syntect::dumps::{from_binary};
+use syntect::dumps::from_binary;
 use syntect::parsing::SyntaxSet;
 
 pub fn get_syntax_set() -> SyntaxSet {

@@ -1,4 +1,4 @@
-// Copyright 2019 Christopher Simpkins
+// Copyright 2020 Christopher Simpkins
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ pub fn parse_options() -> Options {
     opts.optflag("d", "dark", "Dark highlight mode");
     opts.optopt("s", "syntax", "Source syntax format", "SYNTAX");
     // todo: implement custom theme support
-//    opts.optopt("t", "theme", "Theme name", "THEME");
+    //    opts.optopt("t", "theme", "Theme name", "THEME");
     opts.optflag("h", "help", "Print this help menu");
     opts.optflag("v", "version", "Print version number");
 
