@@ -27,7 +27,7 @@ use technicolor::build::syntect::theme::build_themeset_with_names;
 pub fn get_theme_set() -> Result<ThemeSet, Box<dyn Error>> {
     let names = ["Ayu-Dark", "Dracula", "Material"];
     build_themeset_with_names(&names)
-//    ThemeSet::load_from_folder("assets/themes").unwrap()
+    //    ThemeSet::load_from_folder("assets/themes").unwrap()
 }
 
 pub fn get_theme_set_from_binary() -> ThemeSet {

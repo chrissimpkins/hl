@@ -13,8 +13,8 @@
 // limitations under the License.
 
 //use syntect::dumps::{dump_to_file, from_binary, from_reader};
-use std::process::exit;
 use std::fs;
+use std::process::exit;
 
 use syntect::dumps::dump_to_file;
 
@@ -25,8 +25,8 @@ const THEMES_BIN_PATH: &str = "assets/themes.bin";
 const SYNTAXES_BIN_PATH: &str = "assets/syntaxes.bin";
 
 pub fn main() {
-//    build_themes();
-//    build_syntaxes();
+    //    build_themes();
+    //    build_syntaxes();
 }
 
 //fn build_themes() {
