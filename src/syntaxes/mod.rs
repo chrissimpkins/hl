@@ -17,17 +17,21 @@
 //  syntaxes Module
 //
 // ====================
+use std::error::Error;
 
 use syntect::dumps::from_binary;
 use syntect::parsing::SyntaxSet;
 
+use technicolor::build::syntect::syntax::build_full_syntaxset_with_newlines;
+
 pub fn get_syntax_set() -> SyntaxSet {
-    let ss = SyntaxSet::load_defaults_newlines();
-    let mut ssb = ss.into_builder();
-    ssb.add_from_folder("assets/syntaxes", true).unwrap();
-    ssb.build()
+//    let ss = SyntaxSet::load_defaults_newlines();
+//    let mut ssb = ss.into_builder();
+//    ssb.add_from_folder("assets/syntaxes", true).unwrap();
+//    ssb.build()
+    build_full_syntaxset_with_newlines()
 }
 
 pub fn get_syntax_set_from_binary() -> SyntaxSet {
-    from_binary(include_bytes!("../../assets/syntaxes.bin"))
+    from_binary(include_bytes!("../../assets/syntaxes-nl.pack"))
 }
