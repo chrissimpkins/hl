@@ -14,6 +14,7 @@
 
 //use syntect::dumps::{dump_to_file, from_binary, from_reader};
 use std::process::exit;
+use std::fs;
 
 use syntect::dumps::dump_to_file;
 
@@ -24,32 +25,32 @@ const THEMES_BIN_PATH: &str = "assets/themes.bin";
 const SYNTAXES_BIN_PATH: &str = "assets/syntaxes.bin";
 
 pub fn main() {
-    build_themes();
-    build_syntaxes();
+//    build_themes();
+//    build_syntaxes();
 }
 
-fn build_themes() {
-    let ts = get_theme_set();
-    match dump_to_file(&ts, &THEMES_BIN_PATH) {
-        Ok(_) => {
-            println!("Built theme set at {}", THEMES_BIN_PATH);
-        }
-        Err(e) => {
-            eprintln!("Failed to build theme set: Error: {}", e);
-            exit(1)
-        }
-    }
-}
-
-fn build_syntaxes() {
-    let ss = get_syntax_set();
-    match dump_to_file(&ss, SYNTAXES_BIN_PATH) {
-        Ok(_) => {
-            println!("Built syntax set at {}", SYNTAXES_BIN_PATH);
-        }
-        Err(e) => {
-            eprintln!("Failed to build syntax set: Error: {}", e);
-            exit(1)
-        }
-    }
-}
+//fn build_themes() {
+//    let ts = get_theme_set();
+//    match dump_to_file(&ts, &THEMES_BIN_PATH) {
+//        Ok(_) => {
+//            println!("Built theme set at {}", THEMES_BIN_PATH);
+//        }
+//        Err(e) => {
+//            eprintln!("Failed to build theme set: Error: {}", e);
+//            exit(1)
+//        }
+//    }
+//}
+//
+//fn build_syntaxes() {
+//    let ss = get_syntax_set();
+//    match dump_to_file(&ss, SYNTAXES_BIN_PATH) {
+//        Ok(_) => {
+//            println!("Built syntax set at {}", SYNTAXES_BIN_PATH);
+//        }
+//        Err(e) => {
+//            eprintln!("Failed to build syntax set: Error: {}", e);
+//            exit(1)
+//        }
+//    }
+//}
