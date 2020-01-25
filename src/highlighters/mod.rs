@@ -17,11 +17,12 @@
 //  highlighters Module
 //
 // ====================
+use std::fmt::Write;
 
 use syntect::easy::HighlightLines;
 use syntect::highlighting::Style;
 use syntect::parsing::SyntaxSet;
-use syntect::util::as_24_bit_terminal_escaped;
+//use syntect::util::as_24_bit_terminal_escaped;
 
 // Theme options built into syntect library:
 // InspiredGitHub
@@ -32,7 +33,7 @@ use syntect::util::as_24_bit_terminal_escaped;
 // base16-ocean.dark
 // base16-ocean.light
 const THEME_DARK: &str = "Dracula";
-const THEME_DEFAULT: &str = "Material";
+const THEME_DEFAULT: &str = "PreDawn";
 const THEME_LIGHT: &str = "Ayu-Light";
 
 pub fn get_theme(user_request: &str) -> String {
@@ -47,6 +48,34 @@ pub fn highlight_line(line: &str, hl: &mut HighlightLines, ss: &SyntaxSet) -> St
     let ranges: Vec<(Style, &str)> = hl.highlight(line, ss);
 
     as_24_bit_terminal_escaped(&ranges[..], true)
+}
+
+pub fn as_24_bit_terminal_escaped(v: &[(Style, &str)], bg: bool) -> String {
+    let mut s: String = String::new();
+    for &(ref style, text) in v.iter() {
+        if bg {
+            write!(s,
+                   "\x1b[38;2;{};{};{};48;2;{};{};{}m{}",
+                   style.foreground.r,
+                   style.foreground.g,
+                   style.foreground.b,
+                   style.background.r,
+                   style.background.g,
+                   style.background.b,
+                   text)
+                .unwrap();
+        } else {
+            write!(s,
+                   "\x1b[38;2;{};{};{}m{}",
+                   style.foreground.r,
+                   style.foreground.g,
+                   style.foreground.b,
+                   text)
+                .unwrap();
+        }
+    }
+//    s.push_str("\x1b[0m");
+    s
 }
 
 #[cfg(test)]
