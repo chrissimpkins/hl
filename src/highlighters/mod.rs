@@ -45,7 +45,9 @@ pub fn get_theme(user_request: &str) -> String {
 }
 
 pub fn highlight_line(line: &str, hl: &mut HighlightLines, ss: &SyntaxSet) -> String {
-    let ranges: Vec<(Style, &str)> = hl.highlight(line, ss);
+    let mut pre_string = line.to_string();
+    pre_string.push_str("\n");
+    let ranges: Vec<(Style, &str)> = hl.highlight(&pre_string, ss);
 
     as_24_bit_terminal_escaped(&ranges[..], true)
 }
