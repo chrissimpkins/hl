@@ -103,7 +103,8 @@ fn main() {
     for line in io::stdin().lock().lines() {
         match line {
             Ok(n) => {
-                println!("{}", highlight_line(&n, &mut hl, &ss));
+//                print!("{}", highlight_line(&n, &mut hl, &ss));
+                let _ = write!(io::stdout(), "{}", highlight_line(&n, &mut hl, &ss));
             }
             Err(error) => {
                 eprintln!("Error: {}", error);
