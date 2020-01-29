@@ -494,7 +494,7 @@ dependencies = [
 [[package]]
 name = "technicolor"
 version = "0.1.0"
-source = "git+https://github.com/chrissimpkins/technicolor#a7fb5432ab2f610799d3ad606c6abeb1db6e638a"
+source = "git+https://github.com/chrissimpkins/technicolor#44760a0a60c6637128283d6fdb33f873e73d2832"
 dependencies = [
  "syntect 3.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
