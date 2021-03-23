@@ -553,8 +553,9 @@ dependencies = [
 [[package]]
 name = "technicolor"
 version = "0.1.0"
-source = "git+https://github.com/chrissimpkins/technicolor#f80d1d92d4a614944961558b249e5201b7b7e1ac"
+source = "git+https://github.com/chrissimpkins/technicolor#cffaf03a726180f82fd5c4d6d1a2af10ae48fd0d"
 dependencies = [
+ "serde_json",
  "syntect",
 ]
 
