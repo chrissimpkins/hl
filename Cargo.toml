@@ -16,7 +16,7 @@ exclude = [
 ]
 
 [dependencies]
-syntect = "3.3"
+syntect = "4.1"
 getopts = "0.2"
 technicolor = { git = "https://github.com/chrissimpkins/technicolor" }
 
